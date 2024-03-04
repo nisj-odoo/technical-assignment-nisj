@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="fleet_dock_action" model="ir.actions.act_window">
+        <field name="name">Docks</field>
+        <field name="res_model">transport.management.dock</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="transport_management_dock_view_tree" model="ir.ui.view">
+        <field name="name">transport.management.dock.tree</field>
+        <field name="model">transport.management.dock</field>
+        <field name="arch" type="xml">
+            <tree string="Channel" editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="transport_management_dock_view_form" model="ir.ui.view">
+        <field name="name">transport.management.dock.tree</field>
+        <field name="model">transport.management.dock</field>
+        <field name="arch" type="xml">
+            <form string="Dock(s)" >
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Tag Name"/>
+                        <h1 class="mb32">
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>              
+
+    <menuitem id="fleet_config_dock_menu" name="Dock"
+            parent="fleet.fleet_models_configuration" sequence="20" action="transport_management.fleet_dock_action"
+            groups="base.group_system"/>
+   
+</odoo>
