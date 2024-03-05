@@ -6,7 +6,7 @@
       <field name="model">stock.picking.batch</field>
       <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form"/>
       <field name="arch" type="xml">
-         <xpath expr="//field[@name='scheduled_date']" position="replace">
+         <xpath expr="//field[@name='scheduled_date']" position="after">
           <field name="dock_id"/>
           <field name="vehicle_id" placeholder="Third Party Provider"/>
           <field name="vehicle_category_id" placeholder="Eg-Semi Truck"/>
@@ -15,5 +15,37 @@
         </xpath>
       </field>
    </record>
+
+   <record id="stock_picking_batch_view_graph" model="ir.ui.view">
+        <field name="name">stock.picking.batch.view.graph</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="arch" type="xml">
+            <graph string="Graph View" sample="1">
+                <field name="scheduled_date" interval='day'/>
+                <field name="vehicle_category_id"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="stock_picking_batch_view_gantt" model="ir.ui.view">
+        <field name="name">stock.picking.batch.view.gantt</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="arch" type="xml">
+            <gantt
+            string="Gantt View of Batches"
+            date_start='scheduled_date' 
+            default_scale='week' 
+            date_stop ='scheduled_date' 
+            default_group_by='dock_id,vehicle_category_id' 
+            color="dock_id" sample="1" 
+            decoration-info="state in ('draft')">
+                <field name="state" invisible="1"/>
+            </gantt>
+        </field>
+    </record>
+
+    <record id="stock_picking_batch.stock_picking_batch_action" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,graph,gantt</field>
+    </record>
 
 </odoo>

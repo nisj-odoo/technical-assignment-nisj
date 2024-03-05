@@ -34,8 +34,6 @@
         </field>
     </record>              
 
-    <menuitem id="fleet_config_dock_menu" name="Dock"
-            parent="fleet.fleet_models_configuration" sequence="20" action="transport_management.fleet_dock_action"
-            groups="base.group_system"/>
+    <menuitem id="fleet_config_dock_menu" name="Dock" parent="fleet.fleet_models_configuration" sequence="20" action="transport_management.fleet_dock_action" groups="base.group_system"/>
    
 </odoo>
