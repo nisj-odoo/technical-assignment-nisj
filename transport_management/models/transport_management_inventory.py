@@ -18,7 +18,7 @@ class TransportManagementInventory(models.Model):
     def _compute_weight(self):
         for record in self:
             if record.vehicle_category_id or record.vehicle_category_id.max_weight != 0:
-                record.weight = (sum(record.picking_id.mapped('weight'))*100/record.vehicle_category_id.max_weight)
+                record.weight = (sum(record.picking_ids.mapped('weight'))*100/record.vehicle_category_id.max_weight)
             else:
                 record.weight=0
 
@@ -26,7 +26,7 @@ class TransportManagementInventory(models.Model):
     def _compute_volume(self):
         for record in self:
             if record.vehicle_category_id or record.vehicle_category_id.max_volume != 0:
-                record.volume = (sum(record.picking_id.mapped('volume'))*100/record.vehicle_category_id.max_volume)
+                record.volume = (sum(record.picking_ids.mapped('volume'))*100/record.vehicle_category_id.max_volume)
             else:
                 record.volume=0
     
