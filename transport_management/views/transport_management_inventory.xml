@@ -36,9 +36,10 @@
             date_start='scheduled_date' 
             default_scale='week' 
             date_stop ='scheduled_date' 
-            default_group_by='dock_id,vehicle_category_id' 
+            default_group_by='dock_id,vehicle_id' 
             color="dock_id" sample="1" 
-            decoration-info="state in ('draft')">
+            decoration-info="state in ('draft')"
+            precision="{'day':'hour:full','week':'day:full','month':'day:full','year':'day:full'}">
                 <field name="state" invisible="1"/>
             </gantt>
         </field>

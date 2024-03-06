@@ -7,15 +7,11 @@ from odoo import fields,models,api
 class TransportManagementType(models.Model):
     _inherit = "stock.picking"
 
-    weight = fields.Float(compute="_compute_weight_transfers")
-    volume = fields.Float(compute="_compute_volume_transfers")
+    weight = fields.Float(compute="_compute_weight_volume_transfers")
+    volume = fields.Float(compute="_compute_weight_volume_transfers")
 
-    @api.depends('volume')
-    def _compute_volume_transfers(self):
-        for record in self:
-            record.volume = sum(move.product_id.volume*move.product_qty for move in record.move_ids)
-
-    @api.depends('weight')
-    def _compute_weight_transfers(self):
+    @api.depends('volume','weight')
+    def _compute_weight_volume_transfers(self):
         for record in self:
             record.weight = sum(move.product_id.weight*move.product_qty for move in record.move_ids)
+            record.volume = sum(move.product_id.volume*move.product_qty for move in record.move_ids)
