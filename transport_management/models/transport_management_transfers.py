@@ -10,7 +10,7 @@ class TransportManagementType(models.Model):
     weight = fields.Float(compute="_compute_weight_volume_transfers")
     volume = fields.Float(compute="_compute_weight_volume_transfers")
 
-    @api.depends('volume','weight')
+    @api.depends('move_ids')
     def _compute_weight_volume_transfers(self):
         for record in self:
             record.weight = sum(move.product_id.weight*move.product_qty for move in record.move_ids)

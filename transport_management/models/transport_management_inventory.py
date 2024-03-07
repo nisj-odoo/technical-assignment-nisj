@@ -19,7 +19,7 @@ class TransportManagementInventory(models.Model):
     @api.depends("vehicle_category_id.max_weight","vehicle_category_id.max_volume","picking_ids")
     def _compute_weight_volume(self):
         for record in self:
-            if record.vehicle_category_id and record.vehicle_category_id.max_weight != 0 and record.vehicle_category_id.max_volume != 0:
+            if record.vehicle_category_id:
                 record.weight = round(sum(record.picking_ids.mapped('weight'))*100/record.vehicle_category_id.max_weight,2)
                 record.volume = round(sum(record.picking_ids.mapped('volume'))*100/record.vehicle_category_id.max_volume,2)
             else:

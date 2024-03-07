@@ -9,3 +9,4 @@ class TransportManagementDock(models.Model):
     _description = "Specific Dock"
 
     name = fields.Char(string="Name")
+    
